@@ -7,11 +7,11 @@ module "eks" {
   endpoint_private_access = false
   public_access_cidrs     = ["0.0.0.0/0"]
   node_group_name         = "luit"
-  scaling_desired_size    = 1
-  scaling_max_size        = 1
+  scaling_desired_size    = 2
+  scaling_max_size        = 3
   scaling_min_size        = 1
-  instance_types          = ["t3.small"]
-  key_pair                = "my-first-server"
+  instance_types          = ["t2.medium"]
+  key_pair                = "frida-key-pair"
 }
 
 module "vpc" {
