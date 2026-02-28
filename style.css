@@ -1,117 +1,264 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* ================================
+   Tony's Pizza - Modern UI Styles
+   "Big brand" clean + bold accents
+   ================================ */
 
-body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #ff6b6b, #ffd93d);
+/* 1) Design Tokens (easy to tweak) */
+:root{
+    --bg: #f6f7fb;
+    --surface: #ffffff;
+    --text: #0f172a;
+    --muted: #475569;
+    --border: #e2e8f0;
+  
+    --brand-red: #e31837; /* bold pizza red vibe */
+    --brand-blue: #0064d2; /* clean blue accent */
+    --brand-green: #16a34a;
+  
+    --shadow-sm: 0 6px 18px rgba(15, 23, 42, 0.08);
+    --shadow-md: 0 18px 55px rgba(15, 23, 42, 0.12);
+  
+    --radius-sm: 12px;
+    --radius-md: 16px;
+  
+    --ring: 0 0 0 4px rgba(0, 100, 210, 0.18);
+    --ring-red: 0 0 0 4px rgba(227, 24, 55, 0.18);
+  
+    --container: 960px;
+    --pad: 20px;
+  }
+  
+  /* 2) Reset + base */
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ -webkit-text-size-adjust:100%; }
+  body{
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+    background:
+      radial-gradient(1200px 600px at 15% 0%, rgba(0,100,210,0.08), transparent 60%),
+      radial-gradient(900px 500px at 85% 10%, rgba(227,24,55,0.10), transparent 55%),
+      var(--bg);
+    color: var(--text);
     min-height: 100vh;
-    padding: 20px;
-}
-
-.container {
-    max-width: 600px;
+    padding: clamp(16px, 2vw, 28px);
+    line-height: 1.45;
+  }
+  
+  /* 3) Layout container */
+  .container{
+    max-width: var(--container);
     margin: 0 auto;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    padding: 30px;
-}
-
-h1 {
-    text-align: center;
-    color: #d63031;
-    margin-bottom: 10px;
-    font-size: 2.5em;
-}
-
-.order-form {
-    margin-top: 30px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #2d3436;
-}
-
-input,
-select {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+  }
+  
+  /* Optional top "brand header" bar (works even if not in HTML; harmless) */
+  .header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 14px;
+    padding: 18px clamp(16px, 2.3vw, 26px);
+    background:
+      linear-gradient(90deg, rgba(227,24,55,0.06), rgba(0,100,210,0.05));
+    border-bottom: 1px solid var(--border);
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+  }
+  .brand-badge{
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--brand-red), #ff4d6d);
+    box-shadow: 0 10px 24px rgba(227,24,55,0.25);
+  }
+  .brand h1, h1{
+    font-size: clamp(1.4rem, 2.3vw, 2rem);
+    letter-spacing: -0.02em;
+  }
+  .subtitle{
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  
+  /* 4) Main content padding */
+  .main{
+    padding: clamp(18px, 2.5vw, 32px);
+  }
+  
+  /* 5) Section headings */
+  h1{
+    text-align:center;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  h2{
+    font-size: 1.15rem;
+    margin: 18px 0 10px;
+    color: var(--text);
+  }
+  p{ color: var(--muted); }
+  
+  /* 6) Cards (for order details, confirmations, etc.) */
+  .card,
+  .order-details,
+  .order-card{
+    background: #fbfcff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  
+  /* Give order-details a brand accent */
+  .order-details{
+    border-left: 6px solid var(--brand-blue);
+  }
+  .order-card{
+    border-left: 6px solid var(--brand-red);
+  }
+  
+  /* 7) Form styles */
+  .order-form{
+    margin-top: 18px;
+    display: grid;
+    gap: 14px;
+  }
+  
+  .form-group{
+    display: grid;
+    gap: 8px;
+  }
+  
+  label{
+    font-weight: 650;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+  
+  /* Inputs */
+  input, select{
     width: 100%;
-    padding: 12px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border-color 0.3s;
-}
-
-input:focus,
-select:focus {
+    padding: 12px 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 1rem;
+    background: #ffffff;
+    color: var(--text);
+    transition: border-color 160ms ease, box-shadow 160ms ease, transform 120ms ease;
+  }
+  
+  /* Better dropdown arrow spacing on some browsers */
+  select{ padding-right: 38px; }
+  
+  input::placeholder{ color: #94a3b8; }
+  
+  input:focus, select:focus{
     outline: none;
-    border-color: #ff6b6b;
-}
-
-.order-btn {
+    border-color: rgba(0,100,210,0.6);
+    box-shadow: var(--ring);
+  }
+  
+  input:focus-visible, select:focus-visible{
+    outline: none;
+  }
+  
+  /* Slight "press" feedback */
+  input:active, select:active{
+    transform: translateY(0.5px);
+  }
+  
+  /* 8) Primary CTA button */
+  .order-btn{
     width: 100%;
-    background: #d63031;
-    color: white;
-    padding: 15px;
-    border: none;
-    border-radius: 8px;
-    font-size: 18px;
-    font-weight: bold;
+    display: inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap: 10px;
+  
+    background: linear-gradient(135deg, var(--brand-red), #ff355d);
+    color: #fff;
+    padding: 14px 16px;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 14px;
+    font-size: 1.05rem;
+    font-weight: 750;
+    letter-spacing: 0.01em;
+  
     cursor: pointer;
-    transition: background 0.3s;
-}
-
-.order-btn:hover {
-    background: #b71c1c;
-}
-
-.order-details {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    margin: 20px 0;
-    border-left: 4px solid #00b894;
-}
-
-.success-message {
+    box-shadow: 0 14px 32px rgba(227,24,55,0.25);
+    transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
+  }
+  
+  .order-btn:hover{
+    transform: translateY(-1px);
+    filter: saturate(1.02);
+    box-shadow: 0 18px 44px rgba(227,24,55,0.30);
+  }
+  
+  .order-btn:active{
+    transform: translateY(0px);
+    box-shadow: 0 10px 22px rgba(227,24,55,0.22);
+  }
+  
+  .order-btn:focus{
+    outline: none;
+    box-shadow: var(--ring-red), 0 18px 44px rgba(227,24,55,0.30);
+  }
+  
+  /* 9) Success / status messaging */
+  .success-message{
     text-align: center;
-    color: #00b894;
-    font-weight: bold;
-    font-size: 18px;
-    margin: 20px 0;
-}
-
-.order-card {
-    background: #f8f9fa;
-    padding: 15px;
-    margin: 15px 0;
-    border-radius: 8px;
-    border-left: 4px solid #0984e3;
-}
-
-.footer {
-    text-align: center;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #ddd;
-}
-
-.footer a {
-    color: #d63031;
+    color: var(--brand-green);
+    font-weight: 750;
+    font-size: 1.05rem;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(22,163,74,0.08);
+    border: 1px solid rgba(22,163,74,0.18);
+  }
+  
+  /* 10) Footer */
+  .footer{
+    text-align:center;
+    padding: 18px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    background: #ffffff;
+  }
+  
+  .footer a{
+    color: var(--brand-blue);
     text-decoration: none;
+    font-weight: 650;
     margin: 0 10px;
-}
-
-.footer a:hover {
+  }
+  
+  .footer a:hover{
     text-decoration: underline;
-}
+  }
+  
+  /* 11) Responsive: make it feel like a real product UI */
+  @media (max-width: 720px){
+    body{ padding: 14px; }
+    .header{ flex-direction: column; align-items:flex-start; }
+    h1{ text-align:left; }
+    .main{ padding: 16px; }
+  }
+  
+  /* 12) Accessibility & motion preferences */
+  @media (prefers-reduced-motion: reduce){
+    *{ transition: none !important; scroll-behavior: auto !important; }
+  }
+  
+  /* 13) Nice-to-have: subtle page entrance (safe even if not used) */
+  @keyframes fadeUp {
+    from{ opacity:0; transform: translateY(8px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+  .container{ animation: fadeUp 220ms ease-out; }
