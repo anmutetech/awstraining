@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: loan-ingress
+  namespace: fintech
+spec:
+  rules:
+    - host: loan.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: loan-service
+                port:
+                  number: 80
