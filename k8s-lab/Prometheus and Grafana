@@ -1,0 +1,8 @@
+#Add repo for Prometheus.
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+#Add repo for Grafana.
+helm repo add grafana https://grafana.github.io/helm-charts
+
+#Update the repos.
+helm repo update
