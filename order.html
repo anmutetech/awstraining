@@ -2,35 +2,198 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Orders - Tony's Pizza</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Orders - Tony's Pizza Palace</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
-    <div class="container">
-        <h1>📋 All Orders</h1>
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="brand-badge" aria-hidden="true"></div>
+        <div>
+          <h1>Tony’s Pizza Palace</h1>
+          <div class="subtitle">Order dashboard</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a class="link-btn" href="{{ url_for('index') }}">Back to Menu</a>
+      </div>
+    </header>
+
+    <main class="main">
+
+      <section class="card">
+        <div class="title-row">
+          <div>
+            <h2 class="page-title">📋 All Orders</h2>
+            <p class="muted">Track recent orders and statuses in one place.</p>
+          </div>
+
+          <div class="count-badge" aria-label="Order count">
+            {% if orders %}{{ orders|length }}{% else %}0{% endif %} Orders
+          </div>
+        </div>
+
+        <div class="divider"></div>
 
         {% if orders %}
-        {% for order_id, order in orders.items() %}
-        <div class="order-card">
-            <h3>Order #{{ order.id }}</h3>
-            <p><strong>Customer:</strong> {{ order.customer_name }}</p>
-            <p><strong>Pizza:</strong> {{ order.pizza }} ({{ order.size }})</p>
-            <p><strong>Total:</strong> ${{ order.price }}</p>
-            <p><strong>Time:</strong> {{ order.timestamp }}</p>
-            <p><strong>Status:</strong> {{ order.status }}</p>
-        </div>
-        {% endfor %}
-        {% else %}
-        <p>No orders yet. <a href="{{ url_for('index') }}">Place the first order!</a></p>
-        {% endif %}
+          <div class="orders-grid">
+            {% for order_id, order in orders.items() %}
+              <article class="order-tile">
+                <div class="tile-top">
+                  <div class="tile-left">
+                    <div class="order-num">Order #{{ order.id }}</div>
+                    <div class="muted small">{{ order.timestamp }}</div>
+                  </div>
+                  <div class="status-pill">{{ order.status }}</div>
+                </div>
 
-        <div class="footer">
-            <a href="{{ url_for('index') }}">Back to Menu</a>
-        </div>
-    </div>
+                <div class="tile-mid">
+                  <div class="kv-row"><span class="kv-k">Customer</span><span class="kv-v">{{ order.customer_name }}</span></div>
+                  <div class="kv-row"><span class="kv-k">Pizza</span><span class="kv-v">{{ order.pizza }}</span></div>
+                  <div class="kv-row"><span class="kv-k">Size</span><span class="kv-v">{{ order.size }}</span></div>
+                  <div class="kv-row"><span class="kv-k">Total</span><span class="kv-v">${{ order.price }}</span></div>
+                </div>
+              </article>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="empty">
+            <div class="empty-icon" aria-hidden="true">🍕</div>
+            <h3>No orders yet</h3>
+            <p class="muted">Once customers place orders, they’ll show up here.</p>
+            <a class="primary-btn" href="{{ url_for('index') }}">Place the first order</a>
+          </div>
+        {% endif %}
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <span>© {{ 2026 }} Tony’s Pizza Palace</span>
+      <span class="footer-sep">•</span>
+      <a href="{{ url_for('index') }}">Back to Menu</a>
+    </footer>
+
+  </div>
+
+  <!-- Small helper styles (merge into style.css if you want) -->
+  <style>
+    .header-actions { display:flex; gap:10px; flex-wrap:wrap; }
+    .link-btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px; border-radius:12px; border:1px solid var(--border);
+      background:#fff; color:var(--brand-blue); font-weight:800; text-decoration:none;
+      box-shadow: var(--shadow-sm); transition: transform 140ms ease, box-shadow 140ms ease;
+      white-space:nowrap;
+    }
+    .link-btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .link-btn:focus{ outline:none; box-shadow: var(--ring), var(--shadow-md); }
+
+    .page-title{ margin:0 0 6px; font-size: 1.35rem; }
+    .muted{ color: var(--muted); }
+    .small{ font-size: 0.92rem; }
+
+    .title-row{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap: 12px; flex-wrap:wrap;
+    }
+    .count-badge{
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(0,100,210,0.10);
+      border: 1px solid rgba(0,100,210,0.18);
+      color: var(--brand-blue);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .divider{ height:1px; background: var(--border); margin: 16px 0; }
+
+    .orders-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .order-tile{
+      background: #fbfcff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: var(--shadow-sm);
+      display:grid;
+      gap: 12px;
+    }
+
+    .tile-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 10px;
+    }
+
+    .order-num{ font-weight: 950; letter-spacing: -0.01em; }
+    .status-pill{
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(227,24,55,0.10);
+      border: 1px solid rgba(227,24,55,0.18);
+      color: var(--brand-red);
+      font-weight: 900;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .tile-mid{ display:grid; gap: 10px; }
+    .kv-row{ display:flex; justify-content:space-between; gap: 10px; }
+    .kv-k{ color: var(--muted); font-weight: 700; }
+    .kv-v{ color: var(--text); font-weight: 900; text-align:right; }
+
+    .empty{
+      text-align:center;
+      padding: 22px 10px;
+      display:grid;
+      gap: 10px;
+      justify-items:center;
+    }
+    .empty-icon{
+      width: 54px; height: 54px;
+      border-radius: 18px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(227,24,55,0.10);
+      border: 1px solid rgba(227,24,55,0.18);
+      font-size: 1.4rem;
+    }
+
+    .primary-btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 900;
+      text-decoration:none;
+      color:#fff;
+      background: linear-gradient(135deg, var(--brand-red), #ff355d);
+      box-shadow: 0 14px 32px rgba(227,24,55,0.25);
+      border: 1px solid rgba(0,0,0,0.06);
+      transition: transform 140ms ease, box-shadow 140ms ease;
+      margin-top: 6px;
+    }
+    .primary-btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .primary-btn:focus{ outline:none; box-shadow: var(--ring-red), var(--shadow-md); }
+
+    .footer-sep{ margin: 0 10px; color:#cbd5e1; }
+
+    @media (max-width: 900px){
+      .orders-grid{ grid-template-columns: 1fr; }
+    }
+  </style>
 </body>
 
 </html>
