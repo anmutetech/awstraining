@@ -3,6 +3,7 @@ name: Terraform Pipeline
 on:
   push:
     branches:
+      - main
       - dockerlab/setup
 
   workflow_dispatch:
