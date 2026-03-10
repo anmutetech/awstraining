@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - dockerlab/setup
 
   workflow_dispatch:
     inputs:
@@ -23,6 +22,11 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+
     steps:
 
     - name: Checkout Repository
@@ -36,7 +40,7 @@ jobs:
     - name: Terraform Init
       run: |
         cd terraform
-        terraform init
+        terraform init -upgrade
 
 
     - name: Terraform Validate
@@ -63,3 +67,23 @@ jobs:
       run: |
         cd terraform
         terraform destroy -auto-approve
+
+    - name: Configure kubectl
+      run: |
+        aws eks update-kubeconfig \
+        --region us-east-1 \
+        --name migration-eks-cluster
+
+    - name: Install Helm
+      run: |
+         curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+    - name: Install Monitoring
+      run: |
+         chmod +x ./helm/grafana.sh
+         ./helm/grafana.sh
+
+         chmod +x ./helm/prometheus.sh
+         ./helm/prometheus.sh
+
+    
