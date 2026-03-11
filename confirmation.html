@@ -2,35 +2,179 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Confirmed - Tony's Pizza</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Confirmed - Tony's Pizza Palace</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
-    <div class="container">
-        <h1>✅ Order Confirmed!</h1>
+  <div class="container">
 
-        <div class="order-details">
-            <h2>Order #{{ order.id }}</h2>
-            <p><strong>Customer:</strong> {{ order.customer_name }}</p>
-            <p><strong>Phone:</strong> {{ order.customer_phone }}</p>
-            <p><strong>Pizza:</strong> {{ order.pizza }}</p>
-            <p><strong>Size:</strong> {{ order.size }}</p>
-            <p><strong>Total:</strong> ${{ order.price }}</p>
-            <p><strong>Order Time:</strong> {{ order.timestamp }}</p>
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="brand-badge" aria-hidden="true"></div>
+        <div>
+          <h1>Tony’s Pizza Palace</h1>
+          <div class="subtitle">Order confirmed • We’re on it 🔥</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a class="link-btn" href="{{ url_for('index') }}">New Order</a>
+        <a class="link-btn" href="{{ url_for('view_orders') }}">View Orders</a>
+      </div>
+    </header>
+
+    <main class="main">
+
+      <section class="card">
+        <div class="status-row">
+          <div class="status-icon" aria-hidden="true">✅</div>
+          <div>
+            <h2 class="status-title">Order Confirmed!</h2>
+            <p class="muted">Thanks, {{ order.customer_name }} — your order has been received.</p>
+          </div>
         </div>
 
-        <p class="success-message">
-            Thank you for your order! Your delicious pizza will be ready in 15-20 minutes.
-        </p>
+        <div class="divider"></div>
 
-        <div class="footer">
-            <a href="{{ url_for('index') }}">Place Another Order</a> |
-            <a href="{{ url_for('view_orders') }}">View All Orders</a>
+        <div class="grid-2">
+          <div class="card">
+            <h3 class="card-title">Order Details</h3>
+            <div class="kv">
+              <div class="kv-row"><span class="kv-k">Order #</span><span class="kv-v">{{ order.id }}</span></div>
+              <div class="kv-row"><span class="kv-k">Pizza</span><span class="kv-v">{{ order.pizza }}</span></div>
+              <div class="kv-row"><span class="kv-k">Size</span><span class="kv-v">{{ order.size }}</span></div>
+              <div class="kv-row"><span class="kv-k">Total</span><span class="kv-v">${{ order.price }}</span></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Customer</h3>
+            <div class="kv">
+              <div class="kv-row"><span class="kv-k">Name</span><span class="kv-v">{{ order.customer_name }}</span></div>
+              <div class="kv-row"><span class="kv-k">Phone</span><span class="kv-v">{{ order.customer_phone }}</span></div>
+              <div class="kv-row"><span class="kv-k">Order Time</span><span class="kv-v">{{ order.timestamp }}</span></div>
+            </div>
+
+            <div class="eta">
+              <div class="eta-badge">ETA</div>
+              <div>
+                <div class="eta-title">15–20 minutes</div>
+                <div class="eta-sub muted">We’ll have it ready soon.</div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
+
+        <div class="cta-row">
+          <a class="secondary-btn" href="{{ url_for('index') }}">Place Another Order</a>
+          <a class="primary-btn" href="{{ url_for('view_orders') }}">View All Orders</a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <span>© {{ 2026 }} Tony’s Pizza Palace</span>
+      <span class="footer-sep">•</span>
+      <a href="{{ url_for('index') }}">Back to Menu</a>
+    </footer>
+
+  </div>
+
+  <!-- Small helper styles (you can merge into style.css if you want) -->
+  <style>
+    .header-actions { display:flex; gap:10px; flex-wrap:wrap; }
+    .link-btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 12px; border-radius:12px; border:1px solid var(--border);
+      background:#fff; color:var(--brand-blue); font-weight:800; text-decoration:none;
+      box-shadow: var(--shadow-sm); transition: transform 140ms ease, box-shadow 140ms ease;
+      white-space:nowrap;
+    }
+    .link-btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .link-btn:focus{ outline:none; box-shadow: var(--ring), var(--shadow-md); }
+
+    .status-row{ display:flex; gap:12px; align-items:flex-start; }
+    .status-icon{
+      width:44px; height:44px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(22,163,74,0.10);
+      border: 1px solid rgba(22,163,74,0.20);
+      font-size: 1.2rem;
+    }
+    .status-title{ margin:0 0 4px; font-size: 1.35rem; }
+    .muted{ color: var(--muted); }
+
+    .divider{ height:1px; background: var(--border); margin: 16px 0; }
+
+    .grid-2{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .card-title{ font-size: 1.05rem; margin-bottom: 10px; }
+
+    .kv{ display:grid; gap: 10px; }
+    .kv-row{ display:flex; align-items:center; justify-content:space-between; gap: 10px; }
+    .kv-k{ color: var(--muted); font-weight: 700; }
+    .kv-v{ color: var(--text); font-weight: 850; }
+
+    .eta{
+      margin-top: 14px;
+      display:flex; gap:12px; align-items:center;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(0,100,210,0.18);
+      background: rgba(0,100,210,0.06);
+    }
+    .eta-badge{
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(0,100,210,0.12);
+      border: 1px solid rgba(0,100,210,0.18);
+      color: var(--brand-blue);
+      font-weight: 900;
+      font-size: 0.9rem;
+    }
+    .eta-title{ font-weight: 900; }
+    .eta-sub{ font-size: 0.95rem; }
+
+    .cta-row{
+      margin-top: 16px;
+      display:flex; gap: 10px; justify-content:flex-end; flex-wrap:wrap;
+    }
+    .primary-btn, .secondary-btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-weight: 900;
+      text-decoration:none;
+      border: 1px solid var(--border);
+      transition: transform 140ms ease, box-shadow 140ms ease;
+    }
+    .primary-btn{
+      color:#fff;
+      background: linear-gradient(135deg, var(--brand-red), #ff355d);
+      box-shadow: 0 14px 32px rgba(227,24,55,0.25);
+      border-color: rgba(0,0,0,0.06);
+    }
+    .secondary-btn{
+      background:#fff;
+      color: var(--brand-blue);
+      box-shadow: var(--shadow-sm);
+    }
+    .primary-btn:hover, .secondary-btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow-md); }
+    .primary-btn:focus{ outline:none; box-shadow: var(--ring-red), var(--shadow-md); }
+    .secondary-btn:focus{ outline:none; box-shadow: var(--ring), var(--shadow-md); }
+
+    .footer-sep{ margin: 0 10px; color:#cbd5e1; }
+
+    @media (max-width: 820px){
+      .grid-2{ grid-template-columns: 1fr; }
+      .cta-row{ justify-content: stretch; }
+      .primary-btn, .secondary-btn{ width: 100%; }
+    }
+  </style>
 </body>
 
 </html>
