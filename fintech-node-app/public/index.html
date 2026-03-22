@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fintech App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #f1f5f9;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 10px;
+            width: 400px;
+            margin: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: #38bdf8;
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            background: #16a34a;
+            border-radius: 5px;
+        }
+
+        .api {
+            margin-top: 20px;
+            background: #334155;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            background: #38bdf8;
+            color: #000;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>🚀 Fintech App</h1>
+        <p>Deployed via Ansible Automation</p>
+
+        <div class="status">
+            ✅ System Status: Healthy
+        </div>
+
+        <div class="api">
+            <h3>Account Balance</h3>
+            <p id="balance">Click to fetch balance</p>
+            <button onclick="getBalance()">Get Balance</button>
+        </div>
+    </div>
+
+    <script>
+        async function getBalance() {
+            try {
+                const response = await fetch('/api/balance');
+                const data = await response.json();
+                document.getElementById("balance").innerText = "$" + data.balance;
+            } catch (error) {
+                document.getElementById("balance").innerText = "Error fetching balance";
+            }
+        }
+    </script>
+
+</body>
+</html>
