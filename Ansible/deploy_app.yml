@@ -41,11 +41,22 @@
       args:
         chdir: "{{ app_dir }}"
 
+    - name: Find JAR file
+      find:
+        paths: "{{ app_dir }}/target"
+        patterns: "*.jar"
+      register: jar_file
+
     - name: Copy JAR to standardized location
       copy:
-        src: "{{ app_dir }}/target/*.jar"
-        dest: "{{ app_dir }}/{{ jar_name }}"
+        src: "{{ jar_file.files[0].path }}"      #"{{ app_dir }}/target/*.jar"
+        dest: "{{ app_dir }}/{{ jar_name }}"     #"{{ app_dir }}/{{ jar_name }}"
         remote_src: yes
+
+    - name: Fail if no JAR found
+      fail:
+        msg: "No JAR file found in {{ app_dir }}/target"
+      when: jar_file.matched == 0
 
     - name: Create systemd service for Petclinic
       copy:
