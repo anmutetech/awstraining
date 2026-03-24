@@ -1,0 +1,6 @@
+#Install Prometheus
+helm install prometheus prometheus-community/kube-prometheus-stack \
+--namespace monitoring \
+--set grafana.adminPassword=admin123 \
+--set alertmanager.persistentVolume.enabled=false \
+--set server.persistentVolume.enabled=false

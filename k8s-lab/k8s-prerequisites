@@ -1,0 +1,49 @@
+#!/bin/bash
+# Update and install dependencies
+apt-get update -y
+apt-get upgrade -y
+apt-get install -y curl unzip apt-transport-https ca-certificates gnupg lsb-release software-properties-common
+
+# Install AWS CLI v2
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+./aws/install
+ln -s /usr/local/bin/aws /usr/bin/aws
+
+# Install kubectl (latest stable)
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+ln -s /usr/local/bin/kubectl /usr/bin/kubectl
+
+# Install Docker
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+  > /etc/apt/sources.list.d/docker.list
+apt-get update
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+usermod -aG docker ubuntu
+
+# Install eksctl
+curl --silent --location "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+mv /tmp/eksctl /usr/local/bin
+ln -s /usr/local/bin/eksctl /usr/bin/eksctl
+
+# Install Helm 3.15.4 (pinned version)
+HELM_VERSION="v3.15.4"
+curl -LO "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz"
+tar -zxvf "helm-${HELM_VERSION}-linux-amd64.tar.gz"
+mv linux-amd64/helm /usr/local/bin/helm
+chmod +x /usr/local/bin/helm
+ln -s /usr/local/bin/helm /usr/bin/helm
+rm -rf linux-amd64 "helm-${HELM_VERSION}-linux-amd64.tar.gz"
+
+# Install Terraform
+wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" \
+    | sudo tee /etc/apt/sources.list.d/hashicorp.list
+apt-get update -y
+apt-get install -y terraform
+terraform -version

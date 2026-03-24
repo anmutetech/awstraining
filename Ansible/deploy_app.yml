@@ -1,0 +1,119 @@
+- name: Deploy Java Petclinic App (Ubuntu)
+  hosts: webservers
+  become: yes
+
+  vars:
+    app_dir: /opt/petclinic
+    jar_name: petclinic.jar
+
+  tasks:
+
+    - name: Update apt packages
+      apt:
+        update_cache: yes
+
+    - name: Install dependencies
+      apt:
+        name:
+          - openjdk-17-jdk
+          - maven
+          - git
+          - nginx
+        state: present
+
+    - name: Verify Java installation
+      command: java -version
+      register: java_version
+      ignore_errors: yes
+
+    - debug:
+        var: java_version.stdout_lines
+
+    - name: Clone GitHub repo
+      git:
+        repo: https://github.com/lincon-tech/spring-petclinic.git
+        dest: "{{ app_dir }}"
+        version: main
+        force: yes
+
+    - name: Build application using Maven
+      command: mvn clean package -DskipTests
+      args:
+        chdir: "{{ app_dir }}"
+
+    - name: Find JAR file
+      find:
+        paths: "{{ app_dir }}/target"
+        patterns: "*.jar"
+      register: jar_file
+
+    - name: Copy JAR to standardized location
+      copy:
+        src: "{{ jar_file.files[0].path }}"      #"{{ app_dir }}/target/*.jar"
+        dest: "{{ app_dir }}/{{ jar_name }}"     #"{{ app_dir }}/{{ jar_name }}"
+        remote_src: yes
+
+    - name: Fail if no JAR found
+      fail:
+        msg: "No JAR file found in {{ app_dir }}/target"
+      when: jar_file.matched == 0
+
+    - name: Create systemd service for Petclinic
+      copy:
+        dest: /etc/systemd/system/petclinic.service
+        content: |
+          [Unit]
+          Description=Spring Petclinic Application
+          After=network.target
+
+          [Service]
+          User=root
+          WorkingDirectory={{ app_dir }}
+          ExecStart=/usr/bin/java -jar {{ app_dir }}/{{ jar_name }}
+          SuccessExitStatus=143
+          Restart=always
+          RestartSec=5
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Reload systemd
+      command: systemctl daemon-reexec
+
+    - name: Enable and start Petclinic
+      systemd:
+        name: petclinic
+        enabled: yes
+        state: started
+
+    - name: Configure Nginx reverse proxy
+      copy:
+        dest: /etc/nginx/sites-available/petclinic
+        content: |
+          server {
+              listen 80;
+              server_name _;
+
+              location / {
+                  proxy_pass http://localhost:8080;
+                  proxy_set_header Host $host;
+                  proxy_set_header X-Real-IP $remote_addr;
+              }
+          }
+
+    - name: Enable Nginx config
+      file:
+        src: /etc/nginx/sites-available/petclinic
+        dest: /etc/nginx/sites-enabled/petclinic
+        state: link
+        force: yes
+
+    - name: Remove default Nginx config
+      file:
+        path: /etc/nginx/sites-enabled/default
+        state: absent
+
+    - name: Restart Nginx
+      systemd:
+        name: nginx
+        state: restarted
