@@ -8,61 +8,71 @@ A hands-on training repository covering core AWS, DevOps, and cloud-native techn
 
 ## Repository Structure
 
-### Shell Scripting & Linux
+### 01 — Linux and Bash
 
-- **[Bash_Shell_Scripting](./Bash_Shell_Scripting/)** — Variables, conditionals, loops, positional parameters, and AWS automation scripts.
-- **[Linux](./Linux/)** — Basic Linux file operations and exercises.
+| Module | Description |
+|--------|-------------|
+| [linux-basics](./01-linux-and-bash/linux-basics/) | Basic file operations, text editing, permissions |
+| [bash-scripting](./01-linux-and-bash/bash-scripting/) | Variables, conditionals, loops, and AWS automation scripts |
 
-### Containerization
+### 02 — Docker
 
-- **[learning_docker](./learning_docker/)** — Docker fundamentals with a full-stack Node.js/Express application.
-- **[learning-docker-compose](./learning-docker-compose/)** — Multi-container setup with Nginx, MySQL, and Redis.
-- **[mathcorp-calculator](./mathcorp-calculator/)** — Calculator microservice (Node.js/Express) containerized with Docker.
-- **[awspipeline](./awspipeline/)** — Flask REST API with Docker containerization.
+| Module | Description |
+|--------|-------------|
+| [docker-fundamentals](./02-docker/docker-fundamentals/) | Docker images, containers, volumes, networking with Node.js |
+| [docker-compose](./02-docker/docker-compose/) | Multi-container apps with Nginx, MySQL, Redis |
+| [pizza-app](./02-docker/pizza-app/) | Flask web app containerized with Docker |
 
-### Cloud & Infrastructure as Code
+### 03 — Cloud and IAM
 
-- **[iam_lab](./iam_lab/)** — IAM users, groups, policies, and roles walkthrough.
-- **[terraform](./terraform/)** — Provision EC2, VPC, security groups, and EKS clusters on AWS.
-- **[terraform-modules-lab](./terraform-modules-lab/)** — Reusable Terraform modules for networking, compute, storage, and load balancing.
-- **[terraform-three-tier-lab](./terraform-three-tier-lab/)** — Complete three-tier architecture with ALB, ASG, and bastion host.
+| Module | Description |
+|--------|-------------|
+| [iam-lab](./03-cloud-and-iam/iam-lab/) | IAM users, groups, policies, and roles |
+| [serverless](./03-cloud-and-iam/serverless/) | AWS Lambda for EC2 automation, Secrets Manager, trust policies |
 
-### Kubernetes & Helm
+### 04 — Terraform
 
-- **[learning_kubernetes](./learning_kubernetes/)** — EKS provisioning with Terraform, nginx deployments, and Helm chart examples.
-- **[k8s-lab](./k8s-lab/)** — Deployments, services, ConfigMaps, Secrets, Prometheus, Grafana, and Fluent Bit.
-- **[configmap & secrets](./configmap%20%26%20secrets/)** — Inject configuration and secrets into Kubernetes pods.
-- **[happy-helming](./happy-helming/)** — Deploy applications to Kubernetes with Helm.
-- **[Helm-lab](./Helm-lab/)** — Helm charts with environment-specific values (dev, staging, production).
+| Module | Description |
+|--------|-------------|
+| [terraform-basics](./04-terraform/terraform-basics/) | Provision EC2, VPC, security groups on AWS |
+| [terraform-modules](./04-terraform/terraform-modules/) | Reusable modules for networking, compute, storage, load balancing |
+| [terraform-three-tier](./04-terraform/terraform-three-tier/) | Complete 3-tier architecture with ALB, ASG, bastion host |
 
-### Applications & CI/CD
+### 05 — Kubernetes
 
-- **[fintech-node-app](./fintech-node-app/)** — Node.js API with health checks and balance endpoint.
-- **[fintech-loan-k8s](./fintech-loan-k8s/)** — Fintech app deployed to K8s with HPA, Ingress, and Prometheus metrics.
-- **[Jenkins](./Jenkins/)** — Declarative Jenkins pipelines with Docker agents.
-- **[springbootapp](./springbootapp/)** — Spring Boot app with Jenkins, Azure Pipelines, and EKS/AKS deployment.
+| Module | Description |
+|--------|-------------|
+| [k8s-fundamentals](./05-kubernetes/k8s-fundamentals/) | EKS provisioning with Terraform, nginx deployments, Helm basics |
+| [k8s-lab](./05-kubernetes/k8s-lab/) | Deployments, services, ConfigMaps, Secrets, Prometheus, Grafana, Fluent Bit |
+| [helm](./05-kubernetes/helm/) | Helm charts with environment-specific values (dev, staging, production) |
 
-### Configuration Management & Serverless
+### 06 — Applications
 
-- **[Ansible](./Ansible/)** — Automate application deployment with Ansible playbooks.
-- **[serverless](./serverless/)** — AWS Lambda functions for EC2 automation, Secrets Manager, and trust policies.
+| Module | Description |
+|--------|-------------|
+| [flask-api](./06-applications/flask-api/) | Flask REST API with Docker containerization |
+| [calculator-app](./06-applications/calculator-app/) | Node.js calculator microservice |
+| [fintech-node-app](./06-applications/fintech-node-app/) | Node.js API with health checks and balance endpoint |
+| [fintech-loan-app](./06-applications/fintech-loan-app/) | Fintech app on K8s with HPA, Ingress, and Prometheus metrics |
+| [springboot-app](./06-applications/springboot-app/) | Spring Boot with Jenkins, Azure Pipelines, EKS and AKS deployment |
 
-### Monitoring & Code Quality
+### 07 — CI/CD
 
-- **[python-prometheus](./python-prometheus/)** — Flask app exposing Prometheus metrics on Kubernetes with RBAC.
-- **[sonarqube](./sonarqube/)** — SonarQube code quality analysis with Docker Compose.
+| Module | Description |
+|--------|-------------|
+| [jenkins](./07-cicd/jenkins/) | Declarative Jenkins pipelines with Docker agents |
+| [ansible](./07-cicd/ansible/) | Automate application deployment with Ansible playbooks |
 
-### Root-Level Demo App
+### 08 — Monitoring
 
-- **app.py, index.html, order.html, confirmation.html, style.css** — Pizza Palace ordering app (Flask demo for Docker labs).
-- **Dockerfile** — Containerizes the Pizza Palace app with Python 3.11.
-- **install.docker, run-container, pull-from-docker-hub** — Docker setup and container management scripts.
-- **apache-HA.sh** — Apache HTTP server high availability configuration.
-- **jenkins-userdata.sh** — EC2 user data script to bootstrap Jenkins.
+| Module | Description |
+|--------|-------------|
+| [prometheus](./08-monitoring/prometheus/) | Flask app exposing Prometheus metrics on Kubernetes with RBAC |
+| [sonarqube](./08-monitoring/sonarqube/) | Code quality analysis with SonarQube and Docker Compose |
 
 ## Advanced Labs (Standalone Repositories)
 
-These labs are hosted in their own repositories and build on the skills from the modules above.
+These labs build on the skills from the modules above and are hosted in their own repositories.
 
 | Lab | Repository | Description |
 |-----|------------|-------------|

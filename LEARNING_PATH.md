@@ -4,14 +4,14 @@ A recommended order for working through the training modules. Each phase builds 
 
 ---
 
-## Phase 1: Foundations
+## Phase 1: Linux and Bash
 
 Get comfortable with Linux, shell scripting, and version control.
 
 | # | Module | What You'll Learn |
 |---|--------|-------------------|
-| 1 | [Linux](./Linux/) | Basic file operations, text editing, permissions |
-| 2 | [Bash Shell Scripting](./Bash_Shell_Scripting/) | Variables, conditionals, loops, positional parameters |
+| 1 | [Linux Basics](./01-linux-and-bash/linux-basics/) | Basic file operations, text editing, permissions |
+| 2 | [Bash Scripting](./01-linux-and-bash/bash-scripting/) | Variables, conditionals, loops, positional parameters, AWS automation |
 
 ---
 
@@ -21,72 +21,80 @@ Learn to build, run, and manage containers.
 
 | # | Module | What You'll Learn |
 |---|--------|-------------------|
-| 3 | [Learning Docker](./learning_docker/) | Docker fundamentals, images, volumes, networking |
-| 4 | [Learning Docker Compose](./learning-docker-compose/) | Multi-container apps with Nginx, MySQL, Redis |
-| 5 | [MathCorp Calculator](./mathcorp-calculator/) | Containerize a Node.js microservice from scratch |
-| 6 | [AWS Pipeline](./awspipeline/) | Containerize a Flask REST API |
+| 3 | [Docker Fundamentals](./02-docker/docker-fundamentals/) | Docker images, containers, volumes, networking |
+| 4 | [Docker Compose](./02-docker/docker-compose/) | Multi-container apps with Nginx, MySQL, Redis |
+| 5 | [Pizza App](./02-docker/pizza-app/) | Containerize a Flask web application from scratch |
 
 ---
 
-## Phase 3: Cloud Fundamentals
+## Phase 3: Cloud and IAM
 
-Understand AWS services and infrastructure as code.
+Understand AWS services, identity management, and serverless computing.
 
 | # | Module | What You'll Learn |
 |---|--------|-------------------|
-| 7 | [IAM Lab](./iam_lab/) | Users, groups, policies, roles |
-| 8 | [Terraform](./terraform/) | Provision EC2, VPC, security groups on AWS |
-| 9 | [Terraform Modules Lab](./terraform-modules-lab/) | Reusable modules for networking, compute, storage, load balancing |
-| 10 | [Terraform Three-Tier Lab](./terraform-three-tier-lab/) | Complete 3-tier architecture with ALB, ASG, bastion host |
+| 6 | [IAM Lab](./03-cloud-and-iam/iam-lab/) | Users, groups, policies, roles |
+| 7 | [Serverless](./03-cloud-and-iam/serverless/) | AWS Lambda for EC2 automation, Secrets Manager, trust policies |
 
 ---
 
-## Phase 4: Kubernetes
+## Phase 4: Terraform
+
+Provision and manage cloud infrastructure as code.
+
+| # | Module | What You'll Learn |
+|---|--------|-------------------|
+| 8 | [Terraform Basics](./04-terraform/terraform-basics/) | Provision EC2, VPC, security groups on AWS |
+| 9 | [Terraform Modules](./04-terraform/terraform-modules/) | Reusable modules for networking, compute, storage, load balancing |
+| 10 | [Terraform Three-Tier](./04-terraform/terraform-three-tier/) | Complete 3-tier architecture with ALB, ASG, bastion host |
+
+---
+
+## Phase 5: Kubernetes
 
 Deploy and manage applications on Kubernetes.
 
 | # | Module | What You'll Learn |
 |---|--------|-------------------|
-| 11 | [Learning Kubernetes](./learning_kubernetes/) | EKS provisioning, Helm basics, nginx deployments |
-| 12 | [K8s Lab](./k8s-lab/) | Deployments, services, ConfigMaps, Secrets, monitoring, logging |
-| 13 | [ConfigMap and Secrets](./configmap%20%26%20secrets/) | Inject configuration and secrets into pods |
-| 14 | [Happy Helming](./happy-helming/) | Deploy applications with Helm |
-| 15 | [Helm Lab](./Helm-lab/) | Helm charts with environment-specific values (dev, staging, production) |
+| 11 | [K8s Fundamentals](./05-kubernetes/k8s-fundamentals/) | EKS provisioning, Helm basics, nginx deployments |
+| 12 | [K8s Lab](./05-kubernetes/k8s-lab/) | Deployments, services, ConfigMaps, Secrets, monitoring, logging |
+| 13 | [Helm](./05-kubernetes/helm/) | Helm charts with environment-specific values (dev, staging, production) |
 
 ---
 
-## Phase 5: Application Deployment and CI/CD
+## Phase 6: Applications
 
-Build and deploy real applications with automated pipelines.
+Build and deploy real applications.
 
 | # | Module | What You'll Learn |
 |---|--------|-------------------|
-| 16 | [Fintech Node App](./fintech-node-app/) | Build a Node.js API with health checks |
-| 17 | [Fintech Loan K8s](./fintech-loan-k8s/) | Deploy to K8s with HPA, Ingress, and Prometheus metrics |
-| 18 | [Jenkins](./Jenkins/) | Declarative Jenkins pipelines with Docker agents |
-| 19 | [Spring Boot App](./springbootapp/) | Full CI/CD with Jenkins, Azure Pipelines, deploy to EKS and AKS |
+| 14 | [Flask API](./06-applications/flask-api/) | Build and containerize a Flask REST API |
+| 15 | [Calculator App](./06-applications/calculator-app/) | Node.js microservice with Docker |
+| 16 | [Fintech Node App](./06-applications/fintech-node-app/) | Node.js API with health checks |
+| 17 | [Fintech Loan App](./06-applications/fintech-loan-app/) | Deploy to K8s with HPA, Ingress, and Prometheus metrics |
+| 18 | [Spring Boot App](./06-applications/springboot-app/) | Full CI/CD with Jenkins, Azure Pipelines, EKS and AKS deployment |
 
 ---
 
-## Phase 6: Configuration Management and Serverless
+## Phase 7: CI/CD and Configuration Management
 
-Automate infrastructure and explore serverless computing.
+Automate builds, deployments, and infrastructure configuration.
 
 | # | Module | What You'll Learn |
 |---|--------|-------------------|
-| 20 | [Ansible](./Ansible/) | Automate application deployment with playbooks |
-| 21 | [Serverless](./serverless/) | AWS Lambda for EC2 automation, Secrets Manager, trust policies |
+| 19 | [Jenkins](./07-cicd/jenkins/) | Declarative pipelines with Docker agents |
+| 20 | [Ansible](./07-cicd/ansible/) | Automate application deployment with playbooks |
 
 ---
 
-## Phase 7: Monitoring and Code Quality
+## Phase 8: Monitoring and Code Quality
 
 Set up observability and quality gates.
 
 | # | Module | What You'll Learn |
 |---|--------|-------------------|
-| 22 | [Python Prometheus](./python-prometheus/) | Expose custom Prometheus metrics from a Flask app on K8s |
-| 23 | [SonarQube](./sonarqube/) | Code quality analysis with SonarQube and PostgreSQL |
+| 21 | [Prometheus](./08-monitoring/prometheus/) | Expose custom Prometheus metrics from a Flask app on K8s |
+| 22 | [SonarQube](./08-monitoring/sonarqube/) | Code quality analysis with SonarQube and PostgreSQL |
 
 ---
 
@@ -96,9 +104,9 @@ These labs are hosted in their own repositories and build on the skills from the
 
 | # | Lab | Repository | What You'll Learn |
 |---|-----|------------|-------------------|
-| 24 | Cloud Migration Infrastructure | [anmutetech/cloud-migration-infra](https://github.com/anmutetech/cloud-migration-infra) | Provision EKS with Terraform, deploy Prometheus via Helm, GitHub Actions CI/CD |
-| 25 | Legacy App Modernization | [anmutetech/legacy-app-modernization](https://github.com/anmutetech/legacy-app-modernization) | Modernize an e-commerce app with Docker, K8s, CI/CD, and Prometheus |
-| 26 | Container Security Scanning | [anmutetech/container-security-lab](https://github.com/anmutetech/container-security-lab) | Scan Docker images with Trivy, gate deployments on vulnerability results |
-| 27 | GitOps with ArgoCD | [anmutetech/gitops-argocd-lab](https://github.com/anmutetech/gitops-argocd-lab) | Deploy apps via GitOps, auto-sync, self-healing, rollbacks |
-| 28 | Logging and Observability | [anmutetech/logging-observability-lab](https://github.com/anmutetech/logging-observability-lab) | Centralized logging with Promtail, Loki, and Grafana (PLG stack) |
-| 29 | MLOps Pipeline | [anmutetech/mlops-pipeline-lab](https://github.com/anmutetech/mlops-pipeline-lab) | Train and serve an ML model with FastAPI, deploy to EKS, monitor with Prometheus |
+| 23 | Cloud Migration Infrastructure | [anmutetech/cloud-migration-infra](https://github.com/anmutetech/cloud-migration-infra) | Provision EKS with Terraform, deploy Prometheus via Helm, GitHub Actions CI/CD |
+| 24 | Legacy App Modernization | [anmutetech/legacy-app-modernization](https://github.com/anmutetech/legacy-app-modernization) | Modernize an e-commerce app with Docker, K8s, CI/CD, and Prometheus |
+| 25 | Container Security Scanning | [anmutetech/container-security-lab](https://github.com/anmutetech/container-security-lab) | Scan Docker images with Trivy, gate deployments on vulnerability results |
+| 26 | GitOps with ArgoCD | [anmutetech/gitops-argocd-lab](https://github.com/anmutetech/gitops-argocd-lab) | Deploy apps via GitOps, auto-sync, self-healing, and rollbacks |
+| 27 | Logging and Observability | [anmutetech/logging-observability-lab](https://github.com/anmutetech/logging-observability-lab) | Centralized logging with Promtail, Loki, and Grafana (PLG stack) |
+| 28 | MLOps Pipeline | [anmutetech/mlops-pipeline-lab](https://github.com/anmutetech/mlops-pipeline-lab) | Train and serve an ML model with FastAPI, deploy to EKS, monitor with Prometheus |
