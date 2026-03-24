@@ -127,7 +127,6 @@ aws s3 ls | grep terraform-eks-state-migproject
 ```bash
 git clone https://github.com/<your-username>/awstraining.git
 cd awstraining
-git checkout dockerlab/setup
 ```
 
 ### Step 2 — Configure GitHub Secrets
