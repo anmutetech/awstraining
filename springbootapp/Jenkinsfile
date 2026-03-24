@@ -1,0 +1,42 @@
+pipeline {
+   tools {
+       maven 'Maven3'
+   }
+   agent any
+   stages {
+       stage('Checkout') {
+           steps {
+               checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/anmutetech/awstraining/tree/main/springbootapp']]])
+           }
+       }
+       stage('Build Jar') {
+           steps {
+               sh 'mvn clean package'
+           }
+       }
+       stage('Docker Image Build') {
+           steps {
+               sh 'docker build -t mavenapp .'
+           }
+       }
+       stage('Push Docker Image to ECR') {
+           steps {
+               withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+                   sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 953831643964.dkr.ecr.us-east-1.amazonaws.com'
+                   sh 'docker tag mavenapp:latest 953831643964.dkr.ecr.us-east-1.amazonaws.com/mavenapp:latest'
+                   sh 'docker push 953831643964.dkr.ecr.us-east-1.amazonaws.com/mavenapp:latest'
+               }
+           }
+       }
+       stage('Integrate Jenkins with EKS Cluster and Deploy App') {
+           steps {
+               withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
+                 script {
+                   sh ('aws eks update-kubeconfig --name dev --region us-east-1')
+                   sh "kubectl apply -f eks-deploy-from-ecr.yaml"
+               }
+               }
+       }
+   }
+   }
+}
