@@ -2,68 +2,87 @@
 
 A hands-on training repository covering core AWS, DevOps, and cloud-native technologies through practical examples and projects.
 
+**New here?** Start with the [Learning Path](./LEARNING_PATH.md) for a guided order through all modules.
+
+**Need to install tools?** See the [Prerequisites](./PREREQUISITES.md) guide.
+
 ## Repository Structure
 
-### Cloud Infrastructure & Migration
+### 01 — Linux and Bash
 
-- **cloud-migration-infra/** — EKS cluster provisioning with Terraform, Prometheus monitoring via Helm, and a GitHub Actions CI/CD pipeline. Includes a step-by-step student setup guide.
-- **terraform/** — Terraform configurations for provisioning Apache web servers, EC2 instances, security groups, and EKS clusters on AWS.
-- **terraform-modules-lab/** — Reusable Terraform modules for networking (VPC, subnets), compute (EC2), storage (S3, EBS), and load balancing.
-- **terraform-three-tier-lab/** — Complete three-tier web architecture (web, application, database layers) provisioned with Terraform.
+| Module | Description |
+|--------|-------------|
+| [linux-basics](./01-linux-and-bash/linux-basics/) | Basic file operations, text editing, permissions |
+| [bash-scripting](./01-linux-and-bash/bash-scripting/) | Variables, conditionals, loops, and AWS automation scripts |
 
-### Containerization
+### 02 — Docker
 
-- **learning_docker/** — Full-stack Node.js/Express application demonstrating Docker fundamentals, including tests and documentation.
-- **learning-docker-compose/** — Multi-container setup with Nginx, MySQL, and Redis using Docker Compose.
-- **mathcorp-calculator/** — Calculator microservice (Node.js/Express) containerized with Docker.
+| Module | Description |
+|--------|-------------|
+| [docker-fundamentals](./02-docker/docker-fundamentals/) | Docker images, containers, volumes, networking with Node.js |
+| [docker-compose](./02-docker/docker-compose/) | Multi-container apps with Nginx, MySQL, Redis |
+| [pizza-app](./02-docker/pizza-app/) | Flask web app containerized with Docker |
 
-### Kubernetes & Helm
+### 03 — Cloud and IAM
 
-- **learning_kubernetes/** — Kubernetes manifests, EKS cluster provisioning with Terraform, and Helm chart examples with a Flask application.
-- **k8s-lab/** — Kubernetes learning lab covering deployments, services, ConfigMaps, Secrets, Prometheus monitoring, Grafana dashboards, and Fluent Bit logging.
-- **configmap & secrets/** — Kubernetes ConfigMap and Secret examples with a pod consuming both.
-- **happy-helming/** — Kubernetes service and application manifests for Helm-based deployments.
-- **Helm-lab/** — Helm chart for the mathcorp-calculator service with environment-specific values (staging, production).
+| Module | Description |
+|--------|-------------|
+| [iam-lab](./03-cloud-and-iam/iam-lab/) | IAM users, groups, policies, and roles |
+| [serverless](./03-cloud-and-iam/serverless/) | AWS Lambda for EC2 automation, Secrets Manager, trust policies |
 
-### Applications
+### 04 — Terraform
 
-- **legacy-app-modrnization/** — Modernized e-commerce shopping cart app (Node.js/Express) with Docker, Kubernetes deployment, Prometheus metrics, and a GitHub Actions CI/CD pipeline.
-- **fintech-loan-k8s/** — Fintech loan application deployed to Kubernetes with Prometheus metrics, HPA auto-scaling, and Ingress routing.
-- **fintech-node-app/** — Simple fintech Node.js app with balance API and health check endpoints.
-- **awspipeline/** — Simple Flask REST API with Docker containerization.
-- **springbootapp/** — Spring Boot application with AngularJS frontend, deployable to EKS and AKS with multiple CI/CD pipelines (Jenkinsfile, Azure Pipelines).
+| Module | Description |
+|--------|-------------|
+| [terraform-basics](./04-terraform/terraform-basics/) | Provision EC2, VPC, security groups on AWS |
+| [terraform-modules](./04-terraform/terraform-modules/) | Reusable modules for networking, compute, storage, load balancing |
+| [terraform-three-tier](./04-terraform/terraform-three-tier/) | Complete 3-tier architecture with ALB, ASG, bastion host |
 
-### CI/CD & Configuration Management
+### 05 — Kubernetes
 
-- **Jenkins/** — Jenkins pipeline configuration using Docker-based build agents.
-- **Ansible/** — Ansible playbook to deploy the Spring Petclinic Java application with Java 17, Maven, systemd, and Nginx reverse proxy.
+| Module | Description |
+|--------|-------------|
+| [k8s-fundamentals](./05-kubernetes/k8s-fundamentals/) | EKS provisioning with Terraform, nginx deployments, Helm basics |
+| [k8s-lab](./05-kubernetes/k8s-lab/) | Deployments, services, ConfigMaps, Secrets, Prometheus, Grafana, Fluent Bit |
+| [helm](./05-kubernetes/helm/) | Helm charts with environment-specific values (dev, staging, production) |
 
-### Serverless & AWS Services
+### 06 — Applications
 
-- **serverless/** — AWS Lambda functions for EC2 start/stop automation, Secrets Manager integration, and trust policy configuration.
-- **iam_lab/** — Step-by-step IAM lab walkthrough covering users, groups, policies, and roles.
+| Module | Description |
+|--------|-------------|
+| [flask-api](./06-applications/flask-api/) | Flask REST API with Docker containerization |
+| [calculator-app](./06-applications/calculator-app/) | Node.js calculator microservice |
+| [fintech-node-app](./06-applications/fintech-node-app/) | Node.js API with health checks and balance endpoint |
+| [fintech-loan-app](./06-applications/fintech-loan-app/) | Fintech app on K8s with HPA, Ingress, and Prometheus metrics |
+| [springboot-app](./06-applications/springboot-app/) | Spring Boot with Jenkins, Azure Pipelines, EKS and AKS deployment |
 
-### Monitoring & Code Quality
+### 07 — CI/CD
 
-- **python-prometheus/** — Flask application exposing Prometheus metrics on Kubernetes with RBAC configuration.
-- **sonarqube/** — Docker Compose setup for SonarQube with PostgreSQL for code quality analysis.
+| Module | Description |
+|--------|-------------|
+| [jenkins](./07-cicd/jenkins/) | Declarative Jenkins pipelines with Docker agents |
+| [ansible](./07-cicd/ansible/) | Automate application deployment with Ansible playbooks |
 
-### Shell Scripting & Linux
+### 08 — Monitoring
 
-- **Bash_Shell_Scripting/** — Bash fundamentals (variables, loops, conditionals, positional parameters) and AWS automation scripts for EC2 instance management, monitoring, and backups.
-- **Linux/** — Basic Linux learning materials and exercises.
+| Module | Description |
+|--------|-------------|
+| [prometheus](./08-monitoring/prometheus/) | Flask app exposing Prometheus metrics on Kubernetes with RBAC |
+| [sonarqube](./08-monitoring/sonarqube/) | Code quality analysis with SonarQube and Docker Compose |
 
-### Root-Level Files
+## Advanced Labs (Standalone Repositories)
 
-- **app.py, index.html, order.html, confirmation.html, style.css** — Pizza Palace ordering app built with Flask (demo application for Docker labs).
-- **Dockerfile** — Containerizes the Pizza Palace Flask app with Python 3.11.
-- **requirements.txt** — Python dependencies for the Flask app.
-- **install.docker** — Docker installation steps for Ubuntu.
-- **run-container, pull-from-docker-hub** — Scripts to run and pull the pizza app container.
-- **enable-ufw** — UFW firewall configuration commands.
-- **apache-HA.sh** — Script to install and configure Apache HTTP server for high availability.
-- **jenkins-userdata.sh** — EC2 user data script to bootstrap Jenkins with Java 17 on Ubuntu/Debian.
+These labs build on the skills from the modules above and are hosted in their own repositories.
+
+| Lab | Repository | Description |
+|-----|------------|-------------|
+| Cloud Migration Infrastructure | [anmutetech/cloud-migration-infra](https://github.com/anmutetech/cloud-migration-infra) | Provision EKS with Terraform, deploy Prometheus via Helm, GitHub Actions CI/CD |
+| Legacy App Modernization | [anmutetech/legacy-app-modernization](https://github.com/anmutetech/legacy-app-modernization) | Modernize an e-commerce app with Docker, K8s, CI/CD, and Prometheus |
+| Container Security Scanning | [anmutetech/container-security-lab](https://github.com/anmutetech/container-security-lab) | Scan Docker images with Trivy, gate deployments on vulnerability results |
+| GitOps with ArgoCD | [anmutetech/gitops-argocd-lab](https://github.com/anmutetech/gitops-argocd-lab) | Deploy apps via GitOps, auto-sync, self-healing, and rollbacks |
+| Logging and Observability | [anmutetech/logging-observability-lab](https://github.com/anmutetech/logging-observability-lab) | Centralized logging with Promtail, Loki, and Grafana (PLG stack) |
+| MLOps Pipeline | [anmutetech/mlops-pipeline-lab](https://github.com/anmutetech/mlops-pipeline-lab) | Train and serve an ML model with FastAPI, deploy to EKS, monitor with Prometheus |
 
 ## Technologies Covered
 
-AWS (EC2, EKS, IAM, Lambda, Secrets Manager, S3) · Docker · Docker Compose · Kubernetes · Helm · Terraform · Ansible · Jenkins · Azure Pipelines · GitHub Actions · Prometheus · Grafana · Fluent Bit · SonarQube · Spring Boot · Flask · Node.js · Nginx · Bash
+AWS (EC2, EKS, IAM, Lambda, Secrets Manager, S3) · Docker · Docker Compose · Kubernetes · Helm · Terraform · Ansible · Jenkins · Azure Pipelines · GitHub Actions · Prometheus · Grafana · Loki · Fluent Bit · ArgoCD · Trivy · SonarQube · FastAPI · Spring Boot · Flask · Node.js · Nginx · Bash
