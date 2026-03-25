@@ -12,6 +12,47 @@ This module walks you through containerizing a Node.js loan calculator applicati
 - Setting up Horizontal Pod Autoscaler (HPA) for CPU-based autoscaling
 - Prometheus metrics integration with prom-client
 
+## Architecture
+
+```
++----------+     +---------------+     +------------+     +------------------+
+|  GitHub  |     |  Docker Build |     |  DockerHub |     |  Kubernetes      |
+|  Push    +---->+  (Dockerfile) +---->+  Registry  +---->+  Deployment      |
++----------+     +---------------+     +------------+     |  (fintech ns)    |
+                                                          |                  |
+                                                          |  +------------+  |
+                                                          |  | Pod (x2)   |  |
+                                                          |  | loan-app   |  |
+                                                          |  +------+-----+  |
+                                                          |         |        |
+                                                          |         v        |
+                                                          |  +------------+  |
+                                                          |  | HPA        |  |
+                                                          |  | (CPU 50%,  |  |
+                                                          |  |  2-10 pods)|  |
+                                                          |  +------------+  |
+                                                          +--------+---------+
+                                                                   |
+                                                                   v
+                                                          +--------+---------+
+                                                          | Service          |
+                                                          | (LoadBalancer)   |
+                                                          +--------+---------+
+                                                                   |
+                                                                   v
+                                                          +--------+---------+
+                                                          | Ingress          |
+                                                          | (loan.local)     |
+                                                          +--------+---------+
+                                                                   |
+                                                                   v
+                                                              +----+----+
+                                                              |  Users  |
+                                                              +---------+
+
+    Monitoring: Prometheus scrapes /metrics endpoint (prom-client)
+```
+
 ## Prerequisites
 
 - Docker installed

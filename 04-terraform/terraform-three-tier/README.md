@@ -13,6 +13,50 @@ This module deploys a production-style three-tier architecture on AWS using Terr
 - Configuring scaling policies for both frontend and backend tiers
 - Bootstrapping frontend instances with Apache (httpd) via user data
 
+## Architecture
+
+```
+                            +---------------------+
+                            |      Internet       |
+                            +----------+----------+
+                                       |
+                                       v
+                          +------------------------+
+                          |  Application Load      |
+                          |  Balancer (ALB)        |
+                          |  [Public - HTTP/HTTPS] |
+                          +-----+------------+-----+
+                                |            |
+                    +-----------+--+  +------+---------+
+                    | Web Tier     |  | Web Tier       |
+                    | EC2 (AZ-1)  |  | EC2 (AZ-2)     |
+                    | Auto Scaling |  | Auto Scaling   |
+                    | Group        |  | Group          |
+                    +------+-------+  +-------+--------+
+                           |                  |
+                           v                  v
+                          +------------------------+
+                          |  Network Load          |
+                          |  Balancer (NLB)        |
+                          |  [Private - TCP 3000]  |
+                          +-----+------------+-----+
+                                |            |
+                    +-----------+--+  +------+---------+
+                    | App Tier     |  | App Tier       |
+                    | EC2 (AZ-1)  |  | EC2 (AZ-2)     |
+                    | Auto Scaling |  | Auto Scaling   |
+                    | Group        |  | Group          |
+                    +--------------+  +----------------+
+
+    +----------------+
+    | Bastion Host   |-----> SSH access to private instances
+    | (Public Subnet)|
+    +----------------+
+
+    Networking: VPC with 2 public + 2 private subnets
+                Internet Gateway, NAT Gateway, Route Tables
+```
+
 ## Prerequisites
 
 - AWS account with permissions for VPC, EC2, ELB, Auto Scaling, NAT Gateway, and IAM resources

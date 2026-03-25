@@ -13,6 +13,49 @@ This module is a comprehensive Kubernetes lab covering cluster creation on AWS E
 - Creating a ServiceMonitor for automated metric scraping
 - Installing Fluent Bit for log aggregation
 
+## Architecture
+
+```
++-----------------------------------------------------------------------+
+|                         EKS Cluster (fin-loan-app)                    |
+|                     2x t3.medium worker nodes (ASG 2-4)               |
+|                                                                       |
+|  +----------------------------------+                                 |
+|  | Namespace: default               |                                 |
+|  |                                  |                                 |
+|  |  +---------------------------+   |                                 |
+|  |  | Nginx Deployment          |   |                                 |
+|  |  | (3 replicas, resource     |   |                                 |
+|  |  |  limits configured)       |   |                                 |
+|  |  +---------------------------+   |                                 |
+|  |               |                  |                                 |
+|  |               v                  |                                 |
+|  |  +---------------------------+   |  +---------------------------+  |
+|  |  | Nginx Service             |   |  | ConfigMaps & Secrets      |  |
+|  |  | (LoadBalancer)            |   |  |  - app-config (ConfigMap) |  |
+|  |  +---------------------------+   |  |  - app-secret (Secret)    |  |
+|  |                                  |  |  - config-app Deployment  |  |
+|  +----------------------------------+  +---------------------------+  |
+|                                                                       |
+|  +------------------------------------------------------------------+ |
+|  | Namespace: monitoring                                            | |
+|  |                                                                  | |
+|  |  +---------------------+  +------------------+  +--------------+ | |
+|  |  | Prometheus          |  | Grafana          |  | Fluent Bit   | | |
+|  |  | (kube-prometheus-   |  | (Dashboard UI)   |  | (DaemonSet)  | | |
+|  |  |  stack via Helm)    |  | Port 3000        |  | Log shipping | | |
+|  |  +---------------------+  +------------------+  +--------------+ | |
+|  |           |                                                      | |
+|  |           v                                                      | |
+|  |  +---------------------+                                        | |
+|  |  | ServiceMonitor      |                                        | |
+|  |  | (metrics-demo app   |                                        | |
+|  |  |  scraping /metrics) |                                        | |
+|  |  +---------------------+                                        | |
+|  +------------------------------------------------------------------+ |
++-----------------------------------------------------------------------+
+```
+
 ## Prerequisites
 
 - An AWS account with permissions to create EKS clusters
