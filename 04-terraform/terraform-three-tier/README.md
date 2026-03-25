@@ -16,45 +16,52 @@ This module deploys a production-style three-tier architecture on AWS using Terr
 ## Architecture
 
 ```
-                            +---------------------+
-                            |      Internet       |
-                            +----------+----------+
-                                       |
-                                       v
-                          +------------------------+
-                          |  Application Load      |
-                          |  Balancer (ALB)        |
-                          |  [Public - HTTP/HTTPS] |
-                          +-----+------------+-----+
-                                |            |
-                    +-----------+--+  +------+---------+
-                    | Web Tier     |  | Web Tier       |
-                    | EC2 (AZ-1)  |  | EC2 (AZ-2)     |
-                    | Auto Scaling |  | Auto Scaling   |
-                    | Group        |  | Group          |
-                    +------+-------+  +-------+--------+
-                           |                  |
-                           v                  v
-                          +------------------------+
-                          |  Network Load          |
-                          |  Balancer (NLB)        |
-                          |  [Private - TCP 3000]  |
-                          +-----+------------+-----+
-                                |            |
-                    +-----------+--+  +------+---------+
-                    | App Tier     |  | App Tier       |
-                    | EC2 (AZ-1)  |  | EC2 (AZ-2)     |
-                    | Auto Scaling |  | Auto Scaling   |
-                    | Group        |  | Group          |
-                    +--------------+  +----------------+
-
-    +----------------+
-    | Bastion Host   |-----> SSH access to private instances
-    | (Public Subnet)|
-    +----------------+
-
-    Networking: VPC with 2 public + 2 private subnets
-                Internet Gateway, NAT Gateway, Route Tables
+ ┌──────────────────────────────────────────────────────────────────────────────────┐
+ │  VPC: 10.0.0.0/16                                                               │
+ │                                                                                  │
+ │  ┌─── Public Subnets ────────────────────────────────────────────────────────┐   │
+ │  │                                                                           │   │
+ │  │              ┌──────────────┐                                             │   │
+ │  │              │   Internet   │                                             │   │
+ │  │              │   Gateway    │                                             │   │
+ │  │              └──────┬───────┘                                             │   │
+ │  │                     │                                                     │   │
+ │  │                     v                                                     │   │
+ │  │  ┌─────────────────────────────────────┐     ┌────────────────────────┐   │   │
+ │  │  │     Application Load Balancer       │     │     Bastion Host      │   │   │
+ │  │  │     (Internet-facing, HTTP:80)      │     │     (SSH access to    │   │   │
+ │  │  └──────────┬──────────────┬───────────┘     │      private tiers)   │   │   │
+ │  │             │              │                  └──────────┬─────────────┘   │   │
+ │  │             v              v                             │                │   │
+ │  │  ┌──────────────┐  ┌──────────────┐                     │                │   │
+ │  │  │  Web Tier    │  │  Web Tier    │                     │                │   │
+ │  │  │  EC2 (AZ-1)  │  │  EC2 (AZ-2)  │                     │                │   │
+ │  │  │  Apache httpd │  │  Apache httpd │                     │                │   │
+ │  │  │  ASG: 2-4    │  │  ASG: 2-4    │                     │                │   │
+ │  │  └──────┬───────┘  └──────┬───────┘                     │                │   │
+ │  │         │                 │                              │                │   │
+ │  └─────────┼─────────────────┼──────────────────────────────┼────────────────┘   │
+ │            │                 │                              │                    │
+ │  ┌─── Private Subnets ──────┼──────────────────────────────┼────────────────┐   │
+ │  │         │                 │                              │                │   │
+ │  │         v                 v                              │                │   │
+ │  │  ┌─────────────────────────────────────┐                 │                │   │
+ │  │  │     Network Load Balancer           │ <───────────────┘                │   │
+ │  │  │     (Internal, TCP:3000)            │   SSH to private instances       │   │
+ │  │  └──────────┬──────────────┬───────────┘                                  │   │
+ │  │             │              │                                              │   │
+ │  │             v              v                  ┌────────────────────────┐   │   │
+ │  │  ┌──────────────┐  ┌──────────────┐          │     NAT Gateway       │   │   │
+ │  │  │  App Tier    │  │  App Tier    │          │     (Outbound internet │   │   │
+ │  │  │  EC2 (AZ-1)  │  │  EC2 (AZ-2)  │  ──────>│      for private      │   │   │
+ │  │  │  ASG: 2-4    │  │  ASG: 2-4    │          │      subnets)         │   │   │
+ │  │  └──────────────┘  └──────────────┘          └────────────────────────┘   │   │
+ │  │                                                                           │   │
+ │  └───────────────────────────────────────────────────────────────────────────┘   │
+ │                                                                                  │
+ │  Scaling: Step policies (+1/-1 capacity) with 300s cooldown                      │
+ │  Security: Separate SGs for ALB, NLB, Web instances, App instances, Bastion      │
+ └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ## Prerequisites

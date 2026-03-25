@@ -16,44 +16,60 @@ This module is a comprehensive Kubernetes lab covering cluster creation on AWS E
 ## Architecture
 
 ```
-+-----------------------------------------------------------------------+
-|                         EKS Cluster (fin-loan-app)                    |
-|                     2x t3.medium worker nodes (ASG 2-4)               |
-|                                                                       |
-|  +----------------------------------+                                 |
-|  | Namespace: default               |                                 |
-|  |                                  |                                 |
-|  |  +---------------------------+   |                                 |
-|  |  | Nginx Deployment          |   |                                 |
-|  |  | (3 replicas, resource     |   |                                 |
-|  |  |  limits configured)       |   |                                 |
-|  |  +---------------------------+   |                                 |
-|  |               |                  |                                 |
-|  |               v                  |                                 |
-|  |  +---------------------------+   |  +---------------------------+  |
-|  |  | Nginx Service             |   |  | ConfigMaps & Secrets      |  |
-|  |  | (LoadBalancer)            |   |  |  - app-config (ConfigMap) |  |
-|  |  +---------------------------+   |  |  - app-secret (Secret)    |  |
-|  |                                  |  |  - config-app Deployment  |  |
-|  +----------------------------------+  +---------------------------+  |
-|                                                                       |
-|  +------------------------------------------------------------------+ |
-|  | Namespace: monitoring                                            | |
-|  |                                                                  | |
-|  |  +---------------------+  +------------------+  +--------------+ | |
-|  |  | Prometheus          |  | Grafana          |  | Fluent Bit   | | |
-|  |  | (kube-prometheus-   |  | (Dashboard UI)   |  | (DaemonSet)  | | |
-|  |  |  stack via Helm)    |  | Port 3000        |  | Log shipping | | |
-|  |  +---------------------+  +------------------+  +--------------+ | |
-|  |           |                                                      | |
-|  |           v                                                      | |
-|  |  +---------------------+                                        | |
-|  |  | ServiceMonitor      |                                        | |
-|  |  | (metrics-demo app   |                                        | |
-|  |  |  scraping /metrics) |                                        | |
-|  |  +---------------------+                                        | |
-|  +------------------------------------------------------------------+ |
-+-----------------------------------------------------------------------+
+ ┌──────────────────────────────────────────────────────────────────────────────────────┐
+ │  EKS Cluster: fin-loan-app                                                          │
+ │  Region: us-east-1 · 2x t3.medium worker nodes (ASG 2─4)                           │
+ │                                                                                      │
+ │  ┌─── Namespace: default ───────────────────────────────────────────────────────┐    │
+ │  │                                                                              │    │
+ │  │   ┌──────────────────────────────┐     ┌──────────────────────────────────┐  │    │
+ │  │   │  Nginx Deployment            │     │  Config App Deployment           │  │    │
+ │  │   │  ┌────────┐┌────────┐┌────┐  │     │  ┌────────────────────────────┐  │  │    │
+ │  │   │  │ Pod 1  ││ Pod 2  ││Pod3│  │     │  │  Pods consume ConfigMap    │  │  │    │
+ │  │   │  │ nginx  ││ nginx  ││ngnx│  │     │  │  and Secret as env vars   │  │  │    │
+ │  │   │  └────────┘└────────┘└────┘  │     │  └────────────────────────────┘  │  │    │
+ │  │   │  Resources: 100m─250m CPU    │     │             ▲          ▲         │  │    │
+ │  │   │            128Mi─256Mi mem   │     │             │          │         │  │    │
+ │  │   └──────────────┬───────────────┘     │   ┌────────┴───┐ ┌───┴───────┐  │  │    │
+ │  │                  │                     │   │ ConfigMap  │ │  Secret   │  │  │    │
+ │  │                  ▼                     │   │ app-config │ │ app-secret│  │  │    │
+ │  │   ┌──────────────────────────────┐     │   │ DB_URL     │ │ PASSWORD  │  │  │    │
+ │  │   │  Service: nginx-service      │     │   │ LOG_LEVEL  │ │ API_KEY   │  │  │    │
+ │  │   │  Type: LoadBalancer          │     │   └────────────┘ └───────────┘  │  │    │
+ │  │   │  Port: 80 → 80              │     └──────────────────────────────────┘  │    │
+ │  │   └──────────────┬───────────────┘                                          │    │
+ │  │                  │                                                          │    │
+ │  └──────────────────┼──────────────────────────────────────────────────────────┘    │
+ │                     │  ◄── External traffic via AWS ELB                             │
+ │                     ▼                                                                │
+ │              ┌──────────────┐                                                        │
+ │              │    Users     │                                                        │
+ │              └──────────────┘                                                        │
+ │                                                                                      │
+ │  ┌─── Namespace: monitoring ────────────────────────────────────────────────────┐    │
+ │  │                                                                              │    │
+ │  │   ┌────────────────────────┐  ┌─────────────────────┐  ┌──────────────────┐  │    │
+ │  │   │  Prometheus            │  │  Grafana             │  │  Fluent Bit      │  │    │
+ │  │   │  (kube-prometheus-     │  │  Dashboard UI        │  │  (DaemonSet)     │  │    │
+ │  │   │   stack via Helm)      │  │  Port: 3000          │  │  Runs on every   │  │    │
+ │  │   │                        │  │  User: admin         │  │  worker node     │  │    │
+ │  │   │  Collects metrics from │  │                      │  │                  │  │    │
+ │  │   │  all pods and nodes    │  │  Visualizes metrics  │  │  Ships pod logs  │  │    │
+ │  │   └───────────┬────────────┘  │  from Prometheus     │  │  to aggregation  │  │    │
+ │  │               │               └─────────────────────┘  └──────────────────┘  │    │
+ │  │               │                                                              │    │
+ │  │               ▼                                                              │    │
+ │  │   ┌──────────────────────────────────────────┐                               │    │
+ │  │   │  ServiceMonitor                          │                               │    │
+ │  │   │  Scrapes /metrics from metrics-demo app  │                               │    │
+ │  │   │  every 30 seconds                        │                               │    │
+ │  │   └──────────────────────────────────────────┘                               │    │
+ │  │                                                                              │    │
+ │  └──────────────────────────────────────────────────────────────────────────────┘    │
+ │                                                                                      │
+ │  Helm Charts: kube-prometheus-stack, fluent-bit                                      │
+ │  Tools: eksctl, kubectl, Helm 3                                                      │
+ └──────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ## Prerequisites
