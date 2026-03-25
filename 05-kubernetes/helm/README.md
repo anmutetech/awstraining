@@ -80,11 +80,42 @@ kubectl delete -f service.yaml
 kubectl delete -f application.yaml
 ```
 
+## Using the Standalone Kubernetes Manifests (Without Helm)
+
+The `application.yaml` and `service.yaml` files in this directory can be used as standalone Kubernetes manifests, independent of any Helm chart. This provides a simpler deployment option when you do not need Helm's templating, values overrides, or release management features.
+
+This approach is useful when:
+
+- You want a quick, one-command deployment without installing Helm.
+- You are learning Kubernetes fundamentals before moving on to Helm.
+- You need a minimal, static deployment that does not require environment-specific configuration.
+
+To deploy using only the raw manifests:
+
+```bash
+kubectl apply -f application.yaml
+kubectl apply -f service.yaml
+```
+
+To tear down:
+
+```bash
+kubectl delete -f service.yaml
+kubectl delete -f application.yaml
+```
+
+The manifests deploy a Ghost 2.6 blog engine (Alpine-based) with one replica on port 2368, fronted by a NodePort Service that maps port 80 to the container and exposes it on NodePort 30007. You can modify these files directly if you need to change replicas, image versions, or port mappings.
+
 ## Project Structure
 
 ```
-happy-helming/
+helm/
 ├── README.md
-├── application.yaml    # Deployment for Ghost 2.6 blog (1 replica, port 2368)
-└── service.yaml        # NodePort Service (port 80 -> 2368, nodePort 30007)
+├── Chart.yaml              # Helm chart metadata
+├── values.yaml             # Default Helm values
+├── values-staging.yaml     # Staging environment overrides
+├── values-production.yaml  # Production environment overrides
+├── deployment.yaml         # Helm-managed Deployment template
+├── application.yaml        # Standalone K8s Deployment manifest (Ghost 2.6, 1 replica, port 2368)
+└── service.yaml            # Standalone K8s NodePort Service (port 80 -> 2368, nodePort 30007)
 ```

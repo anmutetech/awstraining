@@ -8,10 +8,10 @@ A recommended order for working through the training modules. Each phase builds 
 
 Get comfortable with Linux, shell scripting, and version control.
 
-| # | Module | What You'll Learn |
-|---|--------|-------------------|
-| 1 | [Linux Basics](./01-linux-and-bash/linux-basics/) | Basic file operations, text editing, permissions |
-| 2 | [Bash Scripting](./01-linux-and-bash/bash-scripting/) | Variables, conditionals, loops, positional parameters, AWS automation |
+| # | Module | Level | What You'll Learn |
+|---|--------|-------|-------------------|
+| 1 | [Linux Basics](./01-linux-and-bash/linux-basics/) | Beginner | Basic file operations, text editing, permissions |
+| 2 | [Bash Scripting](./01-linux-and-bash/bash-scripting/) | Beginner | Variables, conditionals, loops, positional parameters, AWS automation |
 
 ---
 
@@ -19,11 +19,11 @@ Get comfortable with Linux, shell scripting, and version control.
 
 Learn to build, run, and manage containers.
 
-| # | Module | What You'll Learn |
-|---|--------|-------------------|
-| 3 | [Docker Fundamentals](./02-docker/docker-fundamentals/) | Docker images, containers, volumes, networking |
-| 4 | [Docker Compose](./02-docker/docker-compose/) | Multi-container apps with Nginx, MySQL, Redis |
-| 5 | [Pizza App](./02-docker/pizza-app/) | Containerize a Flask web application from scratch |
+| # | Module | Level | What You'll Learn |
+|---|--------|-------|-------------------|
+| 3 | [Docker Fundamentals](./02-docker/docker-fundamentals/) | Beginner | Docker images, containers, volumes, networking |
+| 4 | [Docker Compose](./02-docker/docker-compose/) | Beginner | Multi-container apps with Nginx, MySQL, Redis |
+| 5 | [Pizza App](./02-docker/pizza-app/) | Beginner | Containerize a Flask web application from scratch |
 
 ---
 
@@ -31,10 +31,10 @@ Learn to build, run, and manage containers.
 
 Understand AWS services, identity management, and serverless computing.
 
-| # | Module | What You'll Learn |
-|---|--------|-------------------|
-| 6 | [IAM Lab](./03-cloud-and-iam/iam-lab/) | Users, groups, policies, roles |
-| 7 | [Serverless](./03-cloud-and-iam/serverless/) | AWS Lambda for EC2 automation, Secrets Manager, trust policies |
+| # | Module | Level | What You'll Learn |
+|---|--------|-------|-------------------|
+| 6 | [IAM Lab](./03-cloud-and-iam/iam-lab/) | Beginner | Users, groups, policies, roles |
+| 7 | [Serverless](./03-cloud-and-iam/serverless/) | Intermediate | AWS Lambda for EC2 automation, Secrets Manager, trust policies |
 
 ---
 
@@ -42,11 +42,11 @@ Understand AWS services, identity management, and serverless computing.
 
 Provision and manage cloud infrastructure as code.
 
-| # | Module | What You'll Learn |
-|---|--------|-------------------|
-| 8 | [Terraform Basics](./04-terraform/terraform-basics/) | Provision EC2, VPC, security groups on AWS |
-| 9 | [Terraform Modules](./04-terraform/terraform-modules/) | Reusable modules for networking, compute, storage, load balancing |
-| 10 | [Terraform Three-Tier](./04-terraform/terraform-three-tier/) | Complete 3-tier architecture with ALB, ASG, bastion host |
+| # | Module | Level | What You'll Learn |
+|---|--------|-------|-------------------|
+| 8 | [Terraform Basics](./04-terraform/terraform-basics/) | Intermediate | Provision EC2, VPC, security groups on AWS |
+| 9 | [Terraform Modules](./04-terraform/terraform-modules/) | Intermediate | Reusable modules for networking, compute, storage, load balancing |
+| 10 | [Terraform Three-Tier](./04-terraform/terraform-three-tier/) | Advanced | Complete 3-tier architecture with ALB, ASG, bastion host |
 
 ---
 
@@ -54,11 +54,11 @@ Provision and manage cloud infrastructure as code.
 
 Deploy and manage applications on Kubernetes.
 
-| # | Module | What You'll Learn |
-|---|--------|-------------------|
-| 11 | [K8s Fundamentals](./05-kubernetes/k8s-fundamentals/) | EKS provisioning, Helm basics, nginx deployments |
-| 12 | [K8s Lab](./05-kubernetes/k8s-lab/) | Deployments, services, ConfigMaps, Secrets, monitoring, logging |
-| 13 | [Helm](./05-kubernetes/helm/) | Helm charts with environment-specific values (dev, staging, production) |
+| # | Module | Level | What You'll Learn |
+|---|--------|-------|-------------------|
+| 11 | [K8s Fundamentals](./05-kubernetes/k8s-fundamentals/) | Intermediate | EKS provisioning, Helm basics, nginx deployments |
+| 12 | [K8s Lab](./05-kubernetes/k8s-lab/) | Intermediate | Deployments, services, ConfigMaps, Secrets, monitoring, logging |
+| 13 | [Helm](./05-kubernetes/helm/) | Intermediate | Helm charts with environment-specific values (dev, staging, production) |
 
 ---
 
@@ -66,13 +66,13 @@ Deploy and manage applications on Kubernetes.
 
 Build and deploy real applications.
 
-| # | Module | What You'll Learn |
-|---|--------|-------------------|
-| 14 | [Flask API](./06-applications/flask-api/) | Build and containerize a Flask REST API |
-| 15 | [Calculator App](./06-applications/calculator-app/) | Node.js microservice with Docker |
-| 16 | [Fintech Node App](./06-applications/fintech-node-app/) | Node.js API with health checks |
-| 17 | [Fintech Loan App](./06-applications/fintech-loan-app/) | Deploy to K8s with HPA, Ingress, and Prometheus metrics |
-| 18 | [Spring Boot App](./06-applications/springboot-app/) | Full CI/CD with Jenkins, Azure Pipelines, EKS and AKS deployment |
+| # | Module | Level | What You'll Learn |
+|---|--------|-------|-------------------|
+| 14 | [Flask API](./06-applications/flask-api/) | Beginner | Build and containerize a Flask REST API |
+| 15 | [Calculator App](./06-applications/calculator-app/) | Beginner | Node.js microservice with Docker |
+| 16 | [Fintech Node App](./06-applications/fintech-node-app/) | Beginner | Node.js API with health checks |
+| 17 | [Fintech Loan App](./06-applications/fintech-loan-app/) | Intermediate | Deploy to K8s with HPA, Ingress, and Prometheus metrics |
+| 18 | [Spring Boot App](./06-applications/springboot-app/) | Advanced | Full CI/CD with Jenkins, Azure Pipelines, EKS and AKS deployment |
 
 ---
 
@@ -80,10 +80,10 @@ Build and deploy real applications.
 
 Automate builds, deployments, and infrastructure configuration.
 
-| # | Module | What You'll Learn |
-|---|--------|-------------------|
-| 19 | [Jenkins](./07-cicd/jenkins/) | Declarative pipelines with Docker agents |
-| 20 | [Ansible](./07-cicd/ansible/) | Automate application deployment with playbooks |
+| # | Module | Level | What You'll Learn |
+|---|--------|-------|-------------------|
+| 19 | [Jenkins](./07-cicd/jenkins/) | Intermediate | Declarative pipelines with Docker agents |
+| 20 | [Ansible](./07-cicd/ansible/) | Intermediate | Automate application deployment with playbooks |
 
 ---
 
@@ -91,10 +91,10 @@ Automate builds, deployments, and infrastructure configuration.
 
 Set up observability and quality gates.
 
-| # | Module | What You'll Learn |
-|---|--------|-------------------|
-| 21 | [Prometheus](./08-monitoring/prometheus/) | Expose custom Prometheus metrics from a Flask app on K8s |
-| 22 | [SonarQube](./08-monitoring/sonarqube/) | Code quality analysis with SonarQube and PostgreSQL |
+| # | Module | Level | What You'll Learn |
+|---|--------|-------|-------------------|
+| 21 | [Prometheus](./08-monitoring/prometheus/) | Intermediate | Expose custom Prometheus metrics from a Flask app on K8s |
+| 22 | [SonarQube](./08-monitoring/sonarqube/) | Beginner | Code quality analysis with SonarQube and PostgreSQL |
 
 ---
 
@@ -102,11 +102,11 @@ Set up observability and quality gates.
 
 These labs are hosted in their own repositories and build on the skills from the phases above. Complete them in order.
 
-| # | Lab | Repository | What You'll Learn |
-|---|-----|------------|-------------------|
-| 23 | Cloud Migration Infrastructure | [anmutetech/cloud-migration-infra](https://github.com/anmutetech/cloud-migration-infra) | Provision EKS with Terraform, deploy Prometheus via Helm, GitHub Actions CI/CD |
-| 24 | Legacy App Modernization | [anmutetech/legacy-app-modernization](https://github.com/anmutetech/legacy-app-modernization) | Modernize an e-commerce app with Docker, K8s, CI/CD, and Prometheus |
-| 25 | Container Security Scanning | [anmutetech/container-security-lab](https://github.com/anmutetech/container-security-lab) | Scan Docker images with Trivy, gate deployments on vulnerability results |
-| 26 | GitOps with ArgoCD | [anmutetech/gitops-argocd-lab](https://github.com/anmutetech/gitops-argocd-lab) | Deploy apps via GitOps, auto-sync, self-healing, and rollbacks |
-| 27 | Logging and Observability | [anmutetech/logging-observability-lab](https://github.com/anmutetech/logging-observability-lab) | Centralized logging with Promtail, Loki, and Grafana (PLG stack) |
-| 28 | MLOps Pipeline | [anmutetech/mlops-pipeline-lab](https://github.com/anmutetech/mlops-pipeline-lab) | Train and serve an ML model with FastAPI, deploy to EKS, monitor with Prometheus |
+| # | Lab | Level | Repository | What You'll Learn |
+|---|-----|-------|------------|-------------------|
+| 23 | Cloud Migration Infrastructure | Advanced | [anmutetech/cloud-migration-infra](https://github.com/anmutetech/cloud-migration-infra) | Provision EKS with Terraform, deploy Prometheus via Helm, GitHub Actions CI/CD |
+| 24 | Legacy App Modernization | Advanced | [anmutetech/legacy-app-modernization](https://github.com/anmutetech/legacy-app-modernization) | Modernize an e-commerce app with Docker, K8s, CI/CD, and Prometheus |
+| 25 | Container Security Scanning | Advanced | [anmutetech/container-security-lab](https://github.com/anmutetech/container-security-lab) | Scan Docker images with Trivy, gate deployments on vulnerability results |
+| 26 | GitOps with ArgoCD | Advanced | [anmutetech/gitops-argocd-lab](https://github.com/anmutetech/gitops-argocd-lab) | Deploy apps via GitOps, auto-sync, self-healing, and rollbacks |
+| 27 | Logging and Observability | Advanced | [anmutetech/logging-observability-lab](https://github.com/anmutetech/logging-observability-lab) | Centralized logging with Promtail, Loki, and Grafana (PLG stack) |
+| 28 | MLOps Pipeline | Advanced | [anmutetech/mlops-pipeline-lab](https://github.com/anmutetech/mlops-pipeline-lab) | Train and serve an ML model with FastAPI, deploy to EKS, monitor with Prometheus |
