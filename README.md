@@ -82,7 +82,9 @@ These labs build on the skills from the modules above and are hosted in their ow
 | GitOps with ArgoCD | [anmutetech/gitops-argocd-lab](https://github.com/anmutetech/gitops-argocd-lab) | Deploy apps via GitOps, auto-sync, self-healing, and rollbacks |
 | Logging and Observability | [anmutetech/logging-observability-lab](https://github.com/anmutetech/logging-observability-lab) | Centralized logging with Promtail, Loki, and Grafana (PLG stack) |
 | MLOps Pipeline | [anmutetech/mlops-pipeline-lab](https://github.com/anmutetech/mlops-pipeline-lab) | Train and serve an ML model with FastAPI, deploy to EKS, monitor with Prometheus |
+| Healthcare CI/CD | [anmutetech/healthcare-cicd-lab](https://github.com/anmutetech/healthcare-cicd-lab) | Build a CI/CD pipeline for a healthcare patient appointment API with GitHub Actions |
+| Healthcare DevSecOps | [anmutetech/healthcare-devsecops-lab](https://github.com/anmutetech/healthcare-devsecops-lab) | Embed 6 security gates (CodeQL, Trivy, Gitleaks, OPA, Syft, npm audit) into a CI/CD pipeline |
 
 ## Technologies Covered
 
-AWS (EC2, EKS, IAM, Lambda, Secrets Manager, S3) · Docker · Docker Compose · Kubernetes · Helm · Terraform · Ansible · Jenkins · Azure Pipelines · GitHub Actions · Prometheus · Grafana · Loki · Fluent Bit · ArgoCD · Trivy · SonarQube · FastAPI · Spring Boot · Flask · Node.js · Nginx · Bash
+AWS (EC2, EKS, IAM, Lambda, Secrets Manager, S3) · Docker · Docker Compose · Kubernetes · Helm · Terraform · Ansible · Jenkins · Azure Pipelines · GitHub Actions · Prometheus · Grafana · Loki · Fluent Bit · ArgoCD · Trivy · CodeQL · Gitleaks · OPA/Conftest · Syft · SonarQube · FastAPI · Spring Boot · Flask · Node.js · Nginx · Bash

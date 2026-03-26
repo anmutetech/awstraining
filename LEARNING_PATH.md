@@ -110,3 +110,5 @@ These labs are hosted in their own repositories and build on the skills from the
 | 26 | GitOps with ArgoCD | Advanced | [anmutetech/gitops-argocd-lab](https://github.com/anmutetech/gitops-argocd-lab) | Deploy apps via GitOps, auto-sync, self-healing, and rollbacks |
 | 27 | Logging and Observability | Advanced | [anmutetech/logging-observability-lab](https://github.com/anmutetech/logging-observability-lab) | Centralized logging with Promtail, Loki, and Grafana (PLG stack) |
 | 28 | MLOps Pipeline | Advanced | [anmutetech/mlops-pipeline-lab](https://github.com/anmutetech/mlops-pipeline-lab) | Train and serve an ML model with FastAPI, deploy to EKS, monitor with Prometheus |
+| 29 | Healthcare CI/CD | Advanced | [anmutetech/healthcare-cicd-lab](https://github.com/anmutetech/healthcare-cicd-lab) | Build a 3-stage CI/CD pipeline (Test → Build → Deploy) for a healthcare API |
+| 30 | Healthcare DevSecOps | Advanced | [anmutetech/healthcare-devsecops-lab](https://github.com/anmutetech/healthcare-devsecops-lab) | Embed 6 security gates into the pipeline: CodeQL, Trivy, Gitleaks, OPA, Syft, npm audit |
