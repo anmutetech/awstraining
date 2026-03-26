@@ -55,7 +55,10 @@ Fork this repository and check off modules as you complete them.
 ## Advanced Labs (Standalone Repositories)
 - [ ] Cloud Migration Infrastructure
 - [ ] Legacy App Modernization
-- [ ] Container Security Scanning
+- [ ] NovaMart Cloud Migration
+- [ ] Container Security Scanning (VaultPay)
 - [ ] GitOps with ArgoCD
-- [ ] Logging and Observability
-- [ ] MLOps Pipeline
+- [ ] Logging and Observability (ShopStream)
+- [ ] MLOps Pipeline (RiskGuard)
+- [ ] Healthcare CI/CD
+- [ ] Healthcare DevSecOps

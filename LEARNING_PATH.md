@@ -106,7 +106,10 @@ These labs are hosted in their own repositories and build on the skills from the
 |---|-----|-------|------------|-------------------|
 | 23 | Cloud Migration Infrastructure | Advanced | [anmutetech/cloud-migration-infra](https://github.com/anmutetech/cloud-migration-infra) | Provision EKS with Terraform, deploy Prometheus via Helm, GitHub Actions CI/CD |
 | 24 | Legacy App Modernization | Advanced | [anmutetech/legacy-app-modernization](https://github.com/anmutetech/legacy-app-modernization) | Modernize an e-commerce app with Docker, K8s, CI/CD, and Prometheus |
-| 25 | Container Security Scanning | Advanced | [anmutetech/container-security-lab](https://github.com/anmutetech/container-security-lab) | Scan Docker images with Trivy, gate deployments on vulnerability results |
-| 26 | GitOps with ArgoCD | Advanced | [anmutetech/gitops-argocd-lab](https://github.com/anmutetech/gitops-argocd-lab) | Deploy apps via GitOps, auto-sync, self-healing, and rollbacks |
-| 27 | Logging and Observability | Advanced | [anmutetech/logging-observability-lab](https://github.com/anmutetech/logging-observability-lab) | Centralized logging with Promtail, Loki, and Grafana (PLG stack) |
-| 28 | MLOps Pipeline | Advanced | [anmutetech/mlops-pipeline-lab](https://github.com/anmutetech/mlops-pipeline-lab) | Train and serve an ML model with FastAPI, deploy to EKS, monitor with Prometheus |
+| 25 | NovaMart Cloud Migration | Advanced | [anmutetech/novamart-cloud-migration-lab](https://github.com/anmutetech/novamart-cloud-migration-lab) | 3-phase cloud migration (Rehost → Re-platform → Re-architect) with Terraform and EKS |
+| 26 | Container Security Scanning | Advanced | [anmutetech/container-security-lab](https://github.com/anmutetech/container-security-lab) | VaultPay fintech — Trivy scanning, PCI-DSS compliance gates |
+| 27 | GitOps with ArgoCD | Advanced | [anmutetech/gitops-argocd-lab](https://github.com/anmutetech/gitops-argocd-lab) | Deploy apps via GitOps, auto-sync, self-healing, and rollbacks |
+| 28 | Logging and Observability | Advanced | [anmutetech/logging-observability-lab](https://github.com/anmutetech/logging-observability-lab) | ShopStream e-commerce — centralized logging with PLG stack |
+| 29 | MLOps Pipeline | Advanced | [anmutetech/mlops-pipeline-lab](https://github.com/anmutetech/mlops-pipeline-lab) | RiskGuard Insurance — ML risk predictor with FastAPI, EKS, Prometheus |
+| 30 | Healthcare CI/CD | Advanced | [anmutetech/healthcare-cicd-lab](https://github.com/anmutetech/healthcare-cicd-lab) | Build a 3-stage CI/CD pipeline (Test → Build → Deploy) for a healthcare API |
+| 31 | Healthcare DevSecOps | Advanced | [anmutetech/healthcare-devsecops-lab](https://github.com/anmutetech/healthcare-devsecops-lab) | 7-stage DevSecOps pipeline with SonarCloud, Trivy, Gitleaks, and OPA/Conftest |
