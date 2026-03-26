@@ -78,13 +78,14 @@ These labs build on the skills from the modules above and are hosted in their ow
 |-----|------------|-------------|
 | Cloud Migration Infrastructure | [anmutetech/cloud-migration-infra](https://github.com/anmutetech/cloud-migration-infra) | Provision EKS with Terraform, deploy Prometheus via Helm, GitHub Actions CI/CD |
 | Legacy App Modernization | [anmutetech/legacy-app-modernization](https://github.com/anmutetech/legacy-app-modernization) | Modernize an e-commerce app with Docker, K8s, CI/CD, and Prometheus |
-| Container Security Scanning | [anmutetech/container-security-lab](https://github.com/anmutetech/container-security-lab) | Scan Docker images with Trivy, gate deployments on vulnerability results |
+| NovaMart Cloud Migration | [anmutetech/novamart-cloud-migration-lab](https://github.com/anmutetech/novamart-cloud-migration-lab) | 3-phase cloud migration (Rehost → Re-platform → Re-architect) with Terraform and EKS |
+| Container Security Scanning | [anmutetech/container-security-lab](https://github.com/anmutetech/container-security-lab) | VaultPay fintech payment gateway — Trivy scanning, PCI-DSS compliance gates |
 | GitOps with ArgoCD | [anmutetech/gitops-argocd-lab](https://github.com/anmutetech/gitops-argocd-lab) | Deploy apps via GitOps, auto-sync, self-healing, and rollbacks |
-| Logging and Observability | [anmutetech/logging-observability-lab](https://github.com/anmutetech/logging-observability-lab) | Centralized logging with Promtail, Loki, and Grafana (PLG stack) |
-| MLOps Pipeline | [anmutetech/mlops-pipeline-lab](https://github.com/anmutetech/mlops-pipeline-lab) | Train and serve an ML model with FastAPI, deploy to EKS, monitor with Prometheus |
+| Logging and Observability | [anmutetech/logging-observability-lab](https://github.com/anmutetech/logging-observability-lab) | ShopStream e-commerce — centralized logging with Promtail, Loki, and Grafana (PLG stack) |
+| MLOps Pipeline | [anmutetech/mlops-pipeline-lab](https://github.com/anmutetech/mlops-pipeline-lab) | RiskGuard Insurance — ML risk predictor with FastAPI, deploy to EKS, Prometheus metrics |
 | Healthcare CI/CD | [anmutetech/healthcare-cicd-lab](https://github.com/anmutetech/healthcare-cicd-lab) | Build a CI/CD pipeline for a healthcare patient appointment API with GitHub Actions |
-| Healthcare DevSecOps | [anmutetech/healthcare-devsecops-lab](https://github.com/anmutetech/healthcare-devsecops-lab) | Embed 6 security gates (CodeQL, Trivy, Gitleaks, OPA, Syft, npm audit) into a CI/CD pipeline |
+| Healthcare DevSecOps | [anmutetech/healthcare-devsecops-lab](https://github.com/anmutetech/healthcare-devsecops-lab) | 7-stage DevSecOps pipeline with SonarCloud, Trivy, Gitleaks, and OPA/Conftest |
 
 ## Technologies Covered
 
-AWS (EC2, EKS, IAM, Lambda, Secrets Manager, S3) · Docker · Docker Compose · Kubernetes · Helm · Terraform · Ansible · Jenkins · Azure Pipelines · GitHub Actions · Prometheus · Grafana · Loki · Fluent Bit · ArgoCD · Trivy · CodeQL · Gitleaks · OPA/Conftest · Syft · SonarQube · FastAPI · Spring Boot · Flask · Node.js · Nginx · Bash
+AWS (EC2, EKS, IAM, Lambda, Secrets Manager, S3) · Docker · Docker Compose · Kubernetes · Helm · Terraform · Ansible · Jenkins · Azure Pipelines · GitHub Actions · Prometheus · Grafana · Loki · Fluent Bit · ArgoCD · Trivy · SonarCloud · Gitleaks · OPA/Conftest · SonarQube · FastAPI · Spring Boot · Flask · Node.js · Nginx · Bash
